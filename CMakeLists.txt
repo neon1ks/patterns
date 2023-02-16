@@ -17,6 +17,8 @@ set(SBOMBER_SOURCE
     House.h
     LevelGUI.cpp
     LevelGUI.h
+    Logger.cpp
+    Logger.h
     MyTools.cpp
     MyTools.h
     Plane.cpp
@@ -24,6 +26,8 @@ set(SBOMBER_SOURCE
     SBomber.cpp
     SBomber.h
     SBomberProject.cpp
+    ScreenSingleton.cpp
+    ScreenSingleton.h
     Tank.cpp
     Tank.h
 )

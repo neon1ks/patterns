@@ -11,10 +11,9 @@
 class SBomber
 {
 public:
-
     SBomber();
     ~SBomber();
-    
+
     inline bool GetExitFlag() const { return exitFlag; }
 
     void ProcessKBHit();
@@ -26,25 +25,24 @@ public:
     void CheckObjects();
 
 private:
-
     void CheckPlaneAndLevelGUI();
     void CheckBombsAndGround();
-    void __fastcall CheckDestoyableObjects(Bomb* pBomb);
+    void __fastcall CheckDestoyableObjects(Bomb *pBomb);
 
-    void __fastcall DeleteDynamicObj(DynamicObject * pBomb);
-    void __fastcall DeleteStaticObj(GameObject* pObj);
+    void __fastcall DeleteDynamicObj(DynamicObject *pBomb);
+    void __fastcall DeleteStaticObj(GameObject *pObj);
 
-    Ground * FindGround() const;
-    Plane * FindPlane() const;
-    LevelGUI * FindLevelGUI() const;
-    std::vector<DestroyableGroundObject*> FindDestoyableGroundObjects() const;
-    std::vector<Bomb*> FindAllBombs() const;
+    Ground *FindGround() const;
+    Plane *FindPlane() const;
+    LevelGUI *FindLevelGUI() const;
+    std::vector<DestroyableGroundObject *> FindDestoyableGroundObjects() const;
+    std::vector<Bomb *> FindAllBombs() const;
 
     void DropBomb();
 
-    std::vector<DynamicObject*> vecDynamicObj;
-    std::vector<GameObject*> vecStaticObj;
-    
+    std::vector<DynamicObject *> vecDynamicObj;
+    std::vector<GameObject *> vecStaticObj;
+
     bool exitFlag;
 
     uint64_t startTime, finishTime, passedTime;
