@@ -39,11 +39,11 @@ private:
     std::vector<DestroyableGroundObject *> FindDestoyableGroundObjects() const;
     std::vector<Bomb *> FindAllBombs() const;
 
-    BombConstIterator begin() const { return {vecDynamicObj}; }
-    BombConstIterator end() const { return {vecDynamicObj, vecDynamicObj.size()}; }
+    BombConstIterator begin() const { return { vecDynamicObj }; }
+    BombConstIterator end() const { return { vecDynamicObj, vecDynamicObj.size() }; }
 
-    BombIterator begin() { return {vecDynamicObj}; }
-    BombIterator end() { return {vecDynamicObj, vecDynamicObj.size()}; }
+    BombIterator begin() { return { vecDynamicObj }; }
+    BombIterator end() { return { vecDynamicObj, vecDynamicObj.size() }; }
 
     void DropBomb();
 
@@ -56,8 +56,3 @@ private:
     uint16_t bombsNumber, deltaTime, fps;
     int16_t score;
 };
-
-
-
-
-

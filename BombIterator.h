@@ -44,7 +44,10 @@ public:
     {
         check();
     }
-    BombConstIterator(const BombIterator &it) : refArr(it.refArr), curIndex(it.curIndex) { check(); }
+    BombConstIterator(const BombIterator &it) : refArr(it.refArr), curIndex(it.curIndex)
+    {
+        check();
+    }
 
     BombConstIterator &operator++();
     BombConstIterator &operator--();
