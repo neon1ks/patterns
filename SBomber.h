@@ -2,11 +2,12 @@
 
 #include <vector>
 
+#include "Bomb.h"
+#include "BombIterator.h"
+#include "DestroyableGroundObject.h"
+#include "Ground.h"
 #include "LevelGUI.h"
 #include "Plane.h"
-#include "Bomb.h"
-#include "Ground.h"
-#include "Tank.h"
 
 class SBomber
 {
@@ -38,6 +39,12 @@ private:
     std::vector<DestroyableGroundObject *> FindDestoyableGroundObjects() const;
     std::vector<Bomb *> FindAllBombs() const;
 
+    BombConstIterator begin() const { return {vecDynamicObj}; }
+    BombConstIterator end() const { return {vecDynamicObj, vecDynamicObj.size()}; }
+
+    BombIterator begin() { return {vecDynamicObj}; }
+    BombIterator end() { return {vecDynamicObj, vecDynamicObj.size()}; }
+
     void DropBomb();
 
     std::vector<DynamicObject *> vecDynamicObj;
@@ -49,3 +56,8 @@ private:
     uint16_t bombsNumber, deltaTime, fps;
     int16_t score;
 };
+
+
+
+
+

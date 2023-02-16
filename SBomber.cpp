@@ -207,9 +207,8 @@ Ground *SBomber::FindGround() const
 vector<Bomb *> SBomber::FindAllBombs() const
 {
     vector<Bomb *> vecBombs;
-
-    for (size_t i = 0; i < vecDynamicObj.size(); i++) {
-        Bomb *pBomb = dynamic_cast<Bomb *>(vecDynamicObj[i]);
+    for (auto it = begin(); it != end(); ++it) {
+        Bomb *pBomb = dynamic_cast<Bomb *>(*it);
         if (pBomb != nullptr) {
             vecBombs.push_back(pBomb);
         }

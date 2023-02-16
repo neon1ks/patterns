@@ -8,6 +8,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(SBOMBER_SOURCE
     Bomb.cpp
     Bomb.h
+    BombIterator.cpp
+    BombIterator.h
     DestroyableGroundObject.h
     DynamicObject.h
     GameObject.h
