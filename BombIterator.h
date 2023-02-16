@@ -1,5 +1,4 @@
-#ifndef BOMBITERATOR_H
-#define BOMBITERATOR_H
+#pragma once
 
 #include <vector>
 
@@ -58,5 +57,3 @@ public:
 
 bool operator==(const BombConstIterator &l, const BombConstIterator &r);
 bool operator!=(const BombConstIterator &l, const BombConstIterator &r);
-
-#endif // BOMBITERATOR_H
