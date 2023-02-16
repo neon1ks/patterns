@@ -1,5 +1,7 @@
 #include "Logger.h"
 
+#include <cstring>
+
 std::mutex Logger::s_mutex;
 
 void __fastcall Logger::OpenLogFile(const std::string &FN)
