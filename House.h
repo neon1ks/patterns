@@ -17,6 +17,7 @@ public:
     void Draw() const override;
 
     void setLine(size_t index, const std::string &line);
+    void resetLine(size_t index);
 
 private:
     const uint16_t score = 40;
@@ -30,7 +31,13 @@ protected:
     House *house = nullptr;
 
 public:
-    virtual void createHouse() { house = new House(); }
+    virtual void createHouse()
+    {
+        if (house != nullptr) {
+            delete house;
+        }
+        house = new House();
+    }
 
     House *getHouse()
     {
@@ -39,11 +46,9 @@ public:
         return result;
     }
 
-    void createRoof(){};
-    void createWindow(){};
-    void createWalls(){
-        house->setLine(0, "############");
-    };
+    virtual void addRoof();
+    virtual void addWindows();
+    virtual void addWalls();
 
     virtual ~HouseBuilder() { delete house; }
 };
@@ -51,9 +56,25 @@ public:
 class NormalHouseBuilder : public HouseBuilder
 {
 public:
-    void createRoof();
-    void createWindow();
-    void createWalls();
+    void addRoof() override;
+    void addWindows() override;
+    void addWalls() override;
 };
 
-House *createHouse(HouseBuilder &builder);
+class HouseWithTwoWindowsBuilder : public HouseBuilder
+{
+public:
+    void addRoof() override;
+    void addWindows() override;
+    void addWalls() override;
+};
+
+class DesertHouseBuilder : public HouseBuilder
+{
+public:
+    void addRoof() override;
+    void addWindows() override;
+    void addWalls() override;
+};
+
+House *createHouse(HouseBuilder *builder);

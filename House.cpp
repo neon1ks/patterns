@@ -45,30 +45,30 @@ void House::setLine(size_t index, const std::string &line)
     }
 
     if (lines.at(index).size() < line.size()) {
-        lines.at(index).resize(line.size());
+        lines.at(index).resize(line.size(), ' ');
     }
 
     for (size_t i = 0; i < line.size(); ++i) {
-        if (line.at(0) != ' ') {
-            lines.at(index).at(i) = line.at(0);
+        if (line.at(i) != ' ') {
+            lines.at(index).at(i) = line.at(i);
         }
     }
 }
 
-void NormalHouseBuilder::createRoof()
+void House::resetLine(size_t index)
+{
+    lines.at(index).clear();
+}
+
+void HouseBuilder::addRoof()
 {
     house->setLine(6, "  ########  ");
     house->setLine(5, "##        ##");
 }
 
-void NormalHouseBuilder::createWindow()
-{
-    house->setLine(3, "     __     ");
-    house->setLine(2, "    |  |    ");
-    house->setLine(1, "     --     ");
-}
+void HouseBuilder::addWindows() { } // Без окон
 
-void NormalHouseBuilder::createWalls()
+void HouseBuilder::addWalls()
 {
     house->setLine(4, "############");
     house->setLine(3, "#          #");
@@ -77,11 +77,59 @@ void NormalHouseBuilder::createWalls()
     house->setLine(0, "############");
 }
 
-House *createHouse(HouseBuilder &builder)
+void NormalHouseBuilder::addRoof()
 {
-    builder.createHouse();
-    builder.createRoof();
-    builder.createWindow();
-    builder.createWalls();
-    return builder.getHouse();
+    HouseBuilder::addRoof();
+}
+
+void NormalHouseBuilder::addWindows()
+{
+    house->setLine(3, "     __     ");
+    house->setLine(2, "    |__|    ");
+}
+
+void NormalHouseBuilder::addWalls()
+{
+    HouseBuilder::addWalls();
+}
+
+void HouseWithTwoWindowsBuilder::addRoof()
+{
+    HouseBuilder::addRoof();
+}
+
+void HouseWithTwoWindowsBuilder::addWindows()
+{
+    house->setLine(3, "   _    _   ");
+    house->setLine(2, "  |_|  |_|  ");
+}
+
+void HouseWithTwoWindowsBuilder::addWalls()
+{
+    HouseBuilder::addWalls();
+}
+
+void DesertHouseBuilder::addRoof() { } // Без крыши
+
+void DesertHouseBuilder::addWindows()
+{
+    house->setLine(3, "   _   __   ");
+    house->setLine(2, "  |_| |  |  ");
+    house->setLine(1, "      |  |  ");
+}
+
+void DesertHouseBuilder::addWalls()
+{
+    HouseBuilder::addWalls();
+}
+
+House *createHouse(HouseBuilder *builder)
+{
+    builder->createHouse();
+
+    builder->addRoof();
+    builder->addWindows();
+    builder->addWalls();
+
+    return builder->getHouse();
 }

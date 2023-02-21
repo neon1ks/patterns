@@ -11,6 +11,7 @@
 #include "House.h"
 
 #include <thread>
+#include <random>
 
 using namespace std;
 
@@ -60,8 +61,23 @@ SBomber::SBomber()
     pTank->SetPos(50, groundY - 1);
     vecStaticObj.push_back(pTank);
 
-    NormalHouseBuilder normalHouseBuilder;
-    House *pHouse = createHouse(normalHouseBuilder);
+    std::random_device r;
+
+    // Choose a random mean between 1 and 6
+    std::default_random_engine e1(r());
+    std::uniform_int_distribution<int> uniform_dist(1, 3);
+    int mean = uniform_dist(e1);
+
+    HouseBuilder *houseBuilder = nullptr;
+    if (mean == 1) {
+        houseBuilder = new NormalHouseBuilder();
+    } else if (mean == 2 ) {
+        houseBuilder = new DesertHouseBuilder();
+    } else {
+        houseBuilder = new HouseWithTwoWindowsBuilder();
+    }
+
+    House *pHouse = createHouse(houseBuilder);
     pHouse->SetWidth(13);
     pHouse->SetPos(80, groundY - 1);
     vecStaticObj.push_back(pHouse);
