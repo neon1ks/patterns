@@ -30,6 +30,7 @@ set(SBOMBER_SOURCE
     ScreenSingleton.h
     Tank.cpp
     Tank.h
+    Visitor.h Visitor.cpp
 )
 
 add_executable(patterns ${SBOMBER_SOURCE})

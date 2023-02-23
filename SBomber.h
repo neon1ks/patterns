@@ -8,6 +8,8 @@
 #include "Ground.h"
 #include "Tank.h"
 
+#include "Visitor.h"
+
 class SBomber
 {
 public:
@@ -42,6 +44,8 @@ private:
 
     std::vector<DynamicObject *> vecDynamicObj;
     std::vector<GameObject *> vecStaticObj;
+
+    LogVisitor logVisitor;
 
     bool exitFlag;
 

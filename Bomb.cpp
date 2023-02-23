@@ -4,6 +4,8 @@
 #include "Bomb.h"
 #include "ScreenSingleton.h"
 
+#include "Visitor.h"
+
 using namespace std;
 
 void Bomb::Draw() const
@@ -12,4 +14,9 @@ void Bomb::Draw() const
     screen.SetColor(CC_LightMagenta);
     screen.GotoXY(x, y);
     cout << "*";
+}
+
+void Bomb::Accept(const Visitor &v)
+{
+    v.log(*this);
 }

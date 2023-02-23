@@ -9,5 +9,5 @@ public:
 
     void Draw() const override;
 
-private:
+    void Accept(const Visitor &v) override;
 };

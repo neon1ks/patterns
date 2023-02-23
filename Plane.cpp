@@ -4,6 +4,8 @@
 #include "Plane.h"
 #include "ScreenSingleton.h"
 
+#include "Visitor.h"
+
 using namespace std;
 
 void Plane::Draw() const
@@ -18,4 +20,9 @@ void Plane::Draw() const
     cout << "\\\\\\\\";
     screen.GotoXY(x + 3, y + 1);
     cout << "////";
+}
+
+void Plane::Accept(const Visitor &v)
+{
+    v.log(*this);
 }
