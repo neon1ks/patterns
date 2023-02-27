@@ -32,7 +32,10 @@ SBomber::SBomber()
     p->SetPos(5, 10);
     vecDynamicObj.push_back(p);
 
-    LevelGUI *pGUI = new LevelGUI;
+    auto *mediator = new Mediator;
+
+    LevelGUI *pGUI = new LevelGUI(mediator, "Player"s);
+    mediator-> AddColleague(pGUI);
     pGUI->SetParam(passedTime, fps, bombsNumber, score);
     const uint16_t maxX = ScreenSingleton::getInstance().GetMaxX();
     const uint16_t maxY = ScreenSingleton::getInstance().GetMaxY();
@@ -50,12 +53,14 @@ SBomber::SBomber()
     pGr->SetWidth(width - 2);
     vecStaticObj.push_back(pGr);
 
-    Tank *pTank = new Tank;
+    Tank *pTank = new Tank(mediator, "Tank 1"s);
+    pTank->sendMessage("You smeared!");
     pTank->SetWidth(13);
     pTank->SetPos(30, groundY - 1);
     vecStaticObj.push_back(pTank);
 
-    pTank = new Tank;
+    pTank = new Tank(mediator, "Tank 2"s);
+    pTank->sendMessage("You are weak!");
     pTank->SetWidth(13);
     pTank->SetPos(50, groundY - 1);
     vecStaticObj.push_back(pTank);
@@ -77,6 +82,8 @@ SBomber::SBomber()
 
 SBomber::~SBomber()
 {
+    delete mediator;
+
     for (size_t i = 0; i < vecDynamicObj.size(); i++) {
         if (vecDynamicObj[i] != nullptr) {
             delete vecDynamicObj[i];

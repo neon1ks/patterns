@@ -40,3 +40,8 @@ void Tank::Draw() const
     screen.GotoXY(x, y);
     cout << " ###########";
 }
+
+void Tank::sendMessage(const std::string &message)
+{
+    mediator->Notify(this, message);
+}

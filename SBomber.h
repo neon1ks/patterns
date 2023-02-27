@@ -8,6 +8,8 @@
 #include "Ground.h"
 #include "Tank.h"
 
+#include "ICharacter.h"
+
 class SBomber
 {
 public:
@@ -48,4 +50,6 @@ private:
     uint64_t startTime, finishTime, passedTime;
     uint16_t bombsNumber, deltaTime, fps;
     int16_t score;
+
+    Mediator *mediator = nullptr;
 };

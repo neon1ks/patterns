@@ -15,6 +15,7 @@ set(SBOMBER_SOURCE
     Ground.h
     House.cpp
     House.h
+    ICharacter.h
     LevelGUI.cpp
     LevelGUI.h
     Logger.cpp

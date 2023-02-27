@@ -3,11 +3,19 @@
 #include <stdint.h>
 
 #include "GameObject.h"
+#include "ICharacter.h"
 
-class LevelGUI : public GameObject
+#include <string>
+#include <vector>
+#include <queue>
+
+class LevelGUI : public GameObject, public ICharacter
 {
 public:
-    LevelGUI() : bombsNumber(0), score(0), passedTime(0), fps(0), height(0) { }
+    LevelGUI(Mediator *m, const std::string &n)
+        : ICharacter(m), name(n), bombsNumber(0), score(0), passedTime(0), fps(0), height(0)
+    {
+    }
 
     void __fastcall SetParam(uint64_t passedTimeNew, uint64_t fpsNew, uint16_t bombsNumberNew,
                              int16_t scoreNew);
@@ -19,11 +27,22 @@ public:
 
     void Draw() const override;
 
-private:
-    uint16_t height;
-    uint16_t finishX = 109;
+    void beNotified(const std::string &message, ICharacter const *const character) override;
+    void sendMessage(const std::string &message) override { } // Empty
 
-    uint64_t passedTime, fps;
+    std::string getName() const override { return name; }
+
+private:
+    std::string name;
+
     uint16_t bombsNumber;
     int16_t score;
+    uint64_t passedTime;
+    uint64_t fps;
+    uint16_t height;
+
+    uint16_t finishX = 109;
+    uint64_t next = 0;
+    std::string currentMessage;
+    std::queue<std::string> messages;
 };

@@ -4,6 +4,7 @@
 #include "ScreenSingleton.h"
 
 #include <cstring>
+#include <sstream>
 
 using namespace std;
 
@@ -41,6 +42,18 @@ void LevelGUI::Draw() const
     cout << "BombsNum: " << bombsNumber;
     screen.GotoXY(62, 1);
     cout << "Score: " << score;
+
+    if (!currentMessage.empty()) {
+        screen.GotoXY(5, 26);
+        cout << currentMessage;
+    }
+}
+
+void LevelGUI::beNotified(const std::string &message, ICharacter const *const character)
+{
+    std::stringstream ss;
+    ss << character->getName() << ": " << message;
+    messages.push(ss.str());
 }
 
 void __fastcall LevelGUI::SetParam(uint64_t passedTimeNew, uint64_t fpsNew, uint16_t bombsNumberNew,
@@ -50,4 +63,10 @@ void __fastcall LevelGUI::SetParam(uint64_t passedTimeNew, uint64_t fpsNew, uint
     fps = fpsNew;
     bombsNumber = bombsNumberNew;
     score = scoreNew;
+
+    if (!messages.empty() && next < passedTime) {
+        currentMessage = messages.front();
+        messages.pop();
+        next = passedTime + 5000;
+    }
 }
