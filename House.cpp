@@ -44,3 +44,17 @@ void House::Draw() const
     screen.GotoXY(x, y);
     cout << "############";
 }
+
+House *House::Clone() const
+{
+    return new House(*this);
+}
+
+House::House(const House &house)
+{
+    x = house.x;
+    y = house.y;
+    width = house.width;
+}
+
+//House::House

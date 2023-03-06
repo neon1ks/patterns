@@ -50,20 +50,23 @@ SBomber::SBomber()
     pGr->SetWidth(width - 2);
     vecStaticObj.push_back(pGr);
 
-    Tank *pTank = new Tank;
-    pTank->SetWidth(13);
-    pTank->SetPos(30, groundY - 1);
-    vecStaticObj.push_back(pTank);
+    auto *tank = new Tank;
+    tank->SetWidth(13);
+    tank->SetPos(20, groundY - 1);
+    vecStaticObj.push_back(tank);
 
-    pTank = new Tank;
-    pTank->SetWidth(13);
-    pTank->SetPos(50, groundY - 1);
-    vecStaticObj.push_back(pTank);
+    auto *newTank = tank->Clone();
+    newTank->SetPos(35, groundY - 1);
+    vecStaticObj.push_back(newTank);
 
-    House *pHouse = new House;
-    pHouse->SetWidth(13);
-    pHouse->SetPos(80, groundY - 1);
-    vecStaticObj.push_back(pHouse);
+    auto *house = new House;
+    house->SetWidth(13);
+    house->SetPos(60, groundY - 1);
+    vecStaticObj.push_back(house);
+
+    auto *newHouse = house->Clone();
+    newHouse->SetPos(80, groundY - 1);
+    vecStaticObj.push_back(newHouse);
 
     /*
     Bomb* pBomb = new Bomb;

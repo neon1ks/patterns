@@ -40,3 +40,15 @@ void Tank::Draw() const
     screen.GotoXY(x, y);
     cout << " ###########";
 }
+
+Tank *Tank::Clone() const
+{
+    return new Tank(*this);
+}
+
+Tank::Tank(const Tank &tank)
+{
+    x = tank.x;
+    y = tank.y;
+    width = tank.width;
+}
