@@ -2,6 +2,7 @@
 
 #include <cstdint>
 #include <string>
+#include <fstream>
 
 namespace MyTools {
 
@@ -39,15 +40,27 @@ void SetColor(ConsoleColor color);
 
 //=============================================================================================
 
-void __fastcall OpenLogFile(const std::string &FN);
+class Logger {
+public:
+    Logger(const std::string& FN);
+    ~Logger();
 
-void CloseLogFile();
+    Logger(const Logger& logger) = delete;
+    Logger(Logger&& logger) = delete;
+    Logger & operator=(const Logger& logger) = delete;
+    Logger & operator=(Logger&& logger) = delete;
 
-void __fastcall WriteToLog(const std::string &str);
+    void WriteToLog(const std::string &str);
+    void WriteToLog(const std::string &str, int n);
+    void WriteToLog(const std::string &str, double d);
 
-void __fastcall WriteToLog(const std::string &str, int n);
+private:
+    std::ofstream logOut;
 
-void __fastcall WriteToLog(const std::string &str, double d);
+    static std::string GetCurDateTime();
+};
+
+extern Logger logger;
 
 //=============================================================================================
 

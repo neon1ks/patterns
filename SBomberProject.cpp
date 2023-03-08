@@ -9,8 +9,6 @@ using namespace std;
 
 int main(void)
 {
-    MyTools::OpenLogFile("log.txt");
-
     SBomber game;
 
     do {
@@ -29,8 +27,6 @@ int main(void)
         game.TimeFinish();
 
     } while (!game.GetExitFlag());
-
-    MyTools::CloseLogFile();
 
     return 0;
 }
