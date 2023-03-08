@@ -17,14 +17,14 @@ void ScreenSingleton::ClrScr()
 
 void __fastcall ScreenSingleton::GotoXY(double x, double y)
 {
-    const COORD cc = { short(x), short(y) };
+    const COORD cc = { static_cast<short>(x), static_cast<short>(y) };
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), cc);
 }
 
 uint16_t ScreenSingleton::GetMaxX()
 {
-    HANDLE hWndConsole;
-    if (hWndConsole = GetStdHandle(-12)) {
+    HANDLE hWndConsole = GetStdHandle(-12);
+    if (hWndConsole) {
         CONSOLE_SCREEN_BUFFER_INFO consoleInfo;
         if (GetConsoleScreenBufferInfo(hWndConsole, &consoleInfo)) {
             return consoleInfo.srWindow.Right;
@@ -37,8 +37,8 @@ uint16_t ScreenSingleton::GetMaxX()
 
 uint16_t ScreenSingleton::GetMaxY()
 {
-    HANDLE hWndConsole;
-    if (hWndConsole = GetStdHandle(-12)) {
+    HANDLE hWndConsole = GetStdHandle(-12);
+    if (hWndConsole) {
         CONSOLE_SCREEN_BUFFER_INFO consoleInfo;
         if (GetConsoleScreenBufferInfo(hWndConsole, &consoleInfo)) {
             return consoleInfo.srWindow.Bottom;

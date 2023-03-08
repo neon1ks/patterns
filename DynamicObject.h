@@ -1,13 +1,13 @@
 #pragma once
 
-#include <stdint.h>
+#include <cstdint>
 
 #include "GameObject.h"
 
 class DynamicObject : public GameObject
 {
 public:
-    DynamicObject() : speed(0.0), xDirction(0.0), yDirection(0) { }
+    DynamicObject() = default;
 
     inline void SetSpeed(double sp) { speed = sp; }
     inline void SetDirection(double dx, double dy)
@@ -23,6 +23,7 @@ public:
     };
 
 protected:
-    double speed;
-    double xDirction, yDirection;
+    double speed = 0.0;
+    double xDirction = 0.0;
+    double yDirection = 0.0;
 };

@@ -26,17 +26,19 @@ void LevelGUI::Draw() const
     delete[] buf;
     buf = nullptr;
 
-    for (size_t i = size_t(y); i < height + y; i++) {
-        screen.GotoXY(x, (double)i);
+    for (auto i = static_cast<size_t>(y); i < static_cast<size_t>(height + y); i++) {
+        screen.GotoXY(x, static_cast<double>(i));
         cout << "+";
-        screen.GotoXY(x + width - 1, (double)i);
+        screen.GotoXY(x + width - 1, static_cast<double>(i));
         cout << "+";
     }
 
     screen.GotoXY(3, 1);
-    cout << "FramePerSecond: " << static_cast<int>(fps / (passedTime / 1000.0));
+    if (passedTime != 0) {
+        cout << "FramePerSecond: " << (fps * 1000 / passedTime);
+    }
     screen.GotoXY(25, 1);
-    cout << "PassedTime: " << static_cast<int>(passedTime / 1000.0) << " sec";
+    cout << "PassedTime: " << (passedTime / 1000) << " sec";
     screen.GotoXY(46, 1);
     cout << "BombsNum: " << bombsNumber;
     screen.GotoXY(62, 1);
@@ -44,7 +46,7 @@ void LevelGUI::Draw() const
 }
 
 void __fastcall LevelGUI::SetParam(uint64_t passedTimeNew, uint64_t fpsNew, uint16_t bombsNumberNew,
-                                   int16_t scoreNew)
+                                   int scoreNew)
 {
     passedTime = passedTimeNew;
     fps = fpsNew;

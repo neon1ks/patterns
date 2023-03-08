@@ -23,12 +23,9 @@ void Crater::Draw() const
 
 bool Crater::isInside(double xn) const
 {
-    const double size_2 = width / 2.0;
-    if (int(xn) > int(x - size_2) && xn <= int(x + size_2)) {
-        return true;
-    }
-
-    return false;
+    const auto size_2 = width / 2.0;
+    const auto value = static_cast<int>(xn);
+    return value > static_cast<int>(x - size_2) && value <= static_cast<int>(x + size_2);
 }
 
 //==================================================================================================
@@ -44,25 +41,25 @@ void Ground::Draw() const
         return;
     }
 
-    if (vecCrates.size() == 0) {
+    if (vecCrates.empty()) {
         screen.GotoXY(x, y);
         memset(buf, '=', bufSize);
         buf[bufSize - 1] = '\0';
         cout << buf;
     } else {
-        const size_t X = size_t(x);
-        char c;
+        const auto X = static_cast<size_t>(x);
+        char c = {};
         for (size_t i = X; i < width + X; i++) {
-            c = (isInsideAnyCrater((double)i)) ? ' ' : '=';
+            c = (isInsideAnyCrater(static_cast<double>(i))) ? ' ' : '=';
             buf[i - X] = c;
         }
 
-        screen.GotoXY((double)X, y);
+        screen.GotoXY(static_cast<double>(X), y);
         buf[bufSize - 1] = '\0';
         cout << buf;
 
-        for (size_t i = 0; i < vecCrates.size(); i++) {
-            vecCrates[i].Draw();
+        for (const auto &vecCrate : vecCrates) {
+            vecCrate.Draw();
         }
     }
 
@@ -72,8 +69,8 @@ void Ground::Draw() const
 bool Ground::isInsideAnyCrater(double x) const
 {
     bool isInside = false;
-    for (size_t i = 0; i < vecCrates.size(); i++) {
-        if (vecCrates[i].isInside(x)) {
+    for (const auto &vecCrate : vecCrates) {
+        if (vecCrate.isInside(x)) {
             isInside = true;
             break;
         }
@@ -85,7 +82,7 @@ bool Ground::isInsideAnyCrater(double x) const
 void Ground::AddCrater(double xn)
 {
     Crater cr;
-    cr.SetPos(int(xn), y);
+    cr.SetPos(xn, y);
     cr.SetWidth(SMALL_CRATER_SIZE);
     vecCrates.push_back(cr);
 }

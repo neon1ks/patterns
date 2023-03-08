@@ -25,6 +25,14 @@ enum ConsoleColor {
 class ScreenSingleton
 {
 public:
+    ScreenSingleton(const ScreenSingleton &root) = delete;
+    ScreenSingleton &operator=(const ScreenSingleton &root) = delete;
+
+    ScreenSingleton(ScreenSingleton &&root) = delete;
+    ScreenSingleton &operator=(ScreenSingleton &&root) = delete;
+
+    ~ScreenSingleton() = default;
+
     static ScreenSingleton &getInstance()
     {
         static ScreenSingleton theInstance;
@@ -38,7 +46,5 @@ public:
     void SetColor(ConsoleColor color);
 
 private:
-    ScreenSingleton() { }
-    ScreenSingleton(const ScreenSingleton &root) = delete;
-    ScreenSingleton &operator=(const ScreenSingleton &) = delete;
+    ScreenSingleton() = default;
 };

@@ -15,7 +15,7 @@ void Plane::Draw() const
     screen.GotoXY(x - 2, y - 1);
     cout << "===";
     screen.GotoXY(x + 3, y - 1);
-    cout << "\\\\\\\\";
+    cout << R"---(\\\\)---";
     screen.GotoXY(x + 3, y + 1);
     cout << "////";
 }

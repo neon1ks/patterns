@@ -7,6 +7,12 @@
 class Logger
 {
 public:
+    Logger(const Logger &root) = delete;
+    Logger &operator=(const Logger &) = delete;
+
+    Logger(Logger &&root) = delete;
+    Logger &operator=(Logger &&) = delete;
+
     static Logger &getInstance()
     {
         static Logger instance;
@@ -21,12 +27,8 @@ public:
     void __fastcall WriteToLog(const std::string &str, double d, const std::string &prefix = {});
 
 private:
-    Logger() { }
-    Logger(const Logger &root) = delete;
-    Logger &operator=(const Logger &) = delete;
-
-    Logger(Logger &&root) = delete;
-    Logger &operator=(Logger &&) = delete;
+    Logger() = default;
+    ~Logger() = default;
 
     std::ofstream m_logOut;
     static std::mutex s_mutex;
