@@ -7,6 +7,8 @@ class GameObject
 public:
     GameObject() : x(0.0), y(0.0), width(0) { }
 
+    virtual ~GameObject() = default;
+
     virtual void Draw() const = 0;
 
     inline void SetPos(double nx, double ny)
