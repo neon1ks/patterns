@@ -1,4 +1,3 @@
-
 #include <iostream>
 
 #include "Plane.h"
@@ -15,7 +14,7 @@ void Plane::Draw() const
     GotoXY(x - 2, y - 1);
     cout << "===";
     GotoXY(x + 3, y - 1);
-    cout << "\\\\\\\\";
+    cout << R"--(\\\\)--";
     GotoXY(x + 3, y + 1);
     cout << "////";
 }

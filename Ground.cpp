@@ -24,8 +24,7 @@ void Crater::Draw() const
 bool Crater::isInside(double xn) const
 {
     const double size_2 = width / 2.0;
-    if (int(xn) > int(x - size_2) && xn <= int(x + size_2))
-    {
+    if (int(xn) > int(x - size_2) && xn <= int(x + size_2)) {
         return true;
     }
 
@@ -39,35 +38,29 @@ void Ground::Draw() const
     MyTools::SetColor(CC_Green);
 
     const size_t bufSize = width + 1;
-    char* buf = new (nothrow) char[bufSize];
-    if (buf == nullptr)
-    {
+    char *buf = new (nothrow) char[bufSize];
+    if (buf == nullptr) {
         return;
     }
 
-    if (vecCrates.size() == 0)
-    {
+    if (vecCrates.size() == 0) {
         GotoXY(x, y);
         memset(buf, '=', bufSize);
         buf[bufSize - 1] = '\0';
         cout << buf;
-    }
-    else
-    {
+    } else {
         const size_t X = size_t(x);
         char c;
-        for (size_t i = X; i < width + X; i++)
-        {
+        for (size_t i = X; i < width + X; i++) {
             c = (isInsideAnyCrater((double)i)) ? ' ' : '=';
             buf[i - X] = c;
         }
 
         GotoXY((double)X, y);
-        buf[bufSize-1] = '\0';
+        buf[bufSize - 1] = '\0';
         cout << buf;
 
-        for (size_t i = 0; i < vecCrates.size(); i++)
-        {
+        for (size_t i = 0; i < vecCrates.size(); i++) {
             vecCrates[i].Draw();
         }
     }
@@ -78,10 +71,8 @@ void Ground::Draw() const
 bool Ground::isInsideAnyCrater(double x) const
 {
     bool isInside = false;
-    for (size_t i = 0; i < vecCrates.size(); i++)
-    {
-        if (vecCrates[i].isInside(x))
-        {
+    for (size_t i = 0; i < vecCrates.size(); i++) {
+        if (vecCrates[i].isInside(x)) {
             isInside = true;
             break;
         }

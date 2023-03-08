@@ -13,9 +13,8 @@ void LevelGUI::Draw() const
     MyTools::SetColor(CC_White);
 
     GotoXY(x, y);
-    char* buf = new (nothrow) char[width + 1];
-    if (buf == nullptr)
-    {
+    char *buf = new (nothrow) char[width + 1];
+    if (buf == nullptr) {
         return;
     }
     memset(buf, '+', width);
@@ -23,11 +22,10 @@ void LevelGUI::Draw() const
     cout << buf;
     GotoXY(x, y + height);
     cout << buf;
-    delete [] buf;
+    delete[] buf;
     buf = nullptr;
-    
-    for (size_t i = size_t(y); i < height + y; i++)
-    {
+
+    for (size_t i = size_t(y); i < height + y; i++) {
         GotoXY(x, (double)i);
         cout << "+";
         GotoXY(x + width - 1, (double)i);
@@ -44,7 +42,8 @@ void LevelGUI::Draw() const
     cout << "Score: " << score;
 }
 
-void __fastcall LevelGUI::SetParam(uint64_t passedTimeNew, uint64_t fpsNew, uint16_t bombsNumberNew, int16_t scoreNew)
+void __fastcall LevelGUI::SetParam(uint64_t passedTimeNew, uint64_t fpsNew, uint16_t bombsNumberNew,
+                                   int16_t scoreNew)
 {
     passedTime = passedTimeNew;
     fps = fpsNew;

@@ -1,4 +1,3 @@
-
 #include <conio.h>
 
 #include "SBomber.h"
@@ -17,8 +16,7 @@ int main(void)
     do {
         game.TimeStart();
 
-        if (_kbhit())
-        {
+        if (_kbhit()) {
             game.ProcessKBHit();
         }
 
