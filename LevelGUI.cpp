@@ -1,19 +1,18 @@
 #include <iostream>
 
 #include "LevelGUI.h"
-#include "ScreenSingleton.h"
+#include "MyTools.h"
 
 #include <cstring>
 
 using namespace std;
+using namespace MyTools;
 
 void LevelGUI::Draw() const
 {
-    auto &screen = ScreenSingleton::getInstance();
+    MyTools::SetColor(CC_White);
 
-    screen.SetColor(CC_White);
-
-    screen.GotoXY(x, y);
+    GotoXY(x, y);
     char *buf = new (nothrow) char[width + 1];
     if (buf == nullptr) {
         return;
@@ -21,27 +20,27 @@ void LevelGUI::Draw() const
     memset(buf, '+', width);
     buf[width] = '\0';
     cout << buf;
-    screen.GotoXY(x, y + height);
+    GotoXY(x, y + height);
     cout << buf;
     delete[] buf;
     buf = nullptr;
 
     for (auto i = static_cast<size_t>(y); i < static_cast<size_t>(height + y); i++) {
-        screen.GotoXY(x, static_cast<double>(i));
+        GotoXY(x, static_cast<double>(i));
         cout << "+";
-        screen.GotoXY(x + width - 1, static_cast<double>(i));
+        GotoXY(x + width - 1, static_cast<double>(i));
         cout << "+";
     }
 
-    screen.GotoXY(3, 1);
+    GotoXY(3, 1);
     if (passedTime != 0) {
         cout << "FramePerSecond: " << (fps * 1000 / passedTime);
     }
-    screen.GotoXY(25, 1);
-    cout << "PassedTime: " << (passedTime / 1000) << " sec";
-    screen.GotoXY(46, 1);
+    GotoXY(25, 1);
+    cout << "PassedTime: " << static_cast<int>(passedTime / 1000.0) << " sec";
+    GotoXY(46, 1);
     cout << "BombsNum: " << bombsNumber;
-    screen.GotoXY(62, 1);
+    GotoXY(62, 1);
     cout << "Score: " << score;
 }
 

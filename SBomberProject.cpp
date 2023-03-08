@@ -1,17 +1,15 @@
 #include <conio.h>
 
 #include "SBomber.h"
-#include "Logger.h"
-#include "ScreenSingleton.h"
+#include "MyTools.h"
 
 using namespace std;
 
 //========================================================================================================================
 
-int main()
+int main(void)
 {
-
-    Logger::getInstance().OpenLogFile("log.txt");
+    MyTools::OpenLogFile("log.txt");
 
     SBomber game;
 
@@ -22,7 +20,7 @@ int main()
             game.ProcessKBHit();
         }
 
-        ScreenSingleton::getInstance().ClrScr();
+        MyTools::ClrScr();
 
         game.DrawFrame();
         game.MoveObjects();
@@ -32,7 +30,7 @@ int main()
 
     } while (!game.GetExitFlag());
 
-    Logger::getInstance().CloseLogFile();
+    MyTools::CloseLogFile();
 
     return 0;
 }

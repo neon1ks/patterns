@@ -1,9 +1,10 @@
 #include <iostream>
 
 #include "House.h"
-#include "ScreenSingleton.h"
+#include "MyTools.h"
 
 using namespace std;
+using namespace MyTools;
 
 bool House::isInside(double x1, double x2) const
 {
@@ -27,19 +28,17 @@ bool House::isInside(double x1, double x2) const
 
 void House::Draw() const
 {
-    auto &screen = ScreenSingleton::getInstance();
-
-    screen.SetColor(CC_Yellow);
-    screen.GotoXY(x, y - 5);
+    MyTools::SetColor(CC_Yellow);
+    GotoXY(x, y - 5);
     cout << "  ########  ";
-    screen.GotoXY(x, y - 4);
+    GotoXY(x, y - 4);
     cout << "##        ##";
-    screen.GotoXY(x, y - 3);
+    GotoXY(x, y - 3);
     cout << "############";
-    screen.GotoXY(x, y - 2);
+    GotoXY(x, y - 2);
     cout << "#          #";
-    screen.GotoXY(x, y - 1);
+    GotoXY(x, y - 1);
     cout << "#          #";
-    screen.GotoXY(x, y);
+    GotoXY(x, y);
     cout << "############";
 }

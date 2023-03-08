@@ -2,8 +2,7 @@
 #include <conio.h>
 #include <windows.h>
 
-#include "Logger.h"
-#include "ScreenSingleton.h"
+#include "MyTools.h"
 #include "SBomber.h"
 #include "Bomb.h"
 #include "Ground.h"
@@ -13,10 +12,11 @@
 #include <thread>
 
 using namespace std;
+using namespace MyTools;
 
 SBomber::SBomber()
 {
-    Logger::getInstance().WriteToLog(string(__FUNCTION__) + " was invoked");
+    WriteToLog(string(__FUNCTION__) + " was invoked");
 
     auto *p = new Plane;
     p->SetDirection(1, 0.1);
@@ -26,8 +26,8 @@ SBomber::SBomber()
 
     auto *pGUI = new LevelGUI;
     pGUI->SetParam(passedTime, fps, bombsNumber, score);
-    const uint16_t maxX = ScreenSingleton::getInstance().GetMaxX();
-    const uint16_t maxY = ScreenSingleton::getInstance().GetMaxY();
+    const uint16_t maxX = GetMaxX();
+    const uint16_t maxY = GetMaxY();
     const uint16_t offset = 3;
     const uint16_t width = maxX - 7;
     pGUI->SetPos(offset, offset);
@@ -80,7 +80,7 @@ SBomber::~SBomber()
 
 void SBomber::MoveObjects()
 {
-    Logger::getInstance().WriteToLog(string(__FUNCTION__) + " was invoked");
+    WriteToLog(string(__FUNCTION__) + " was invoked");
 
     for (auto &it : vecDynamicObj) {
         if (it != nullptr) {
@@ -91,7 +91,7 @@ void SBomber::MoveObjects()
 
 void SBomber::CheckObjects()
 {
-    Logger::getInstance().WriteToLog(string(__FUNCTION__) + " was invoked");
+    WriteToLog(string(__FUNCTION__) + " was invoked");
 
     CheckPlaneAndLevelGUI();
     CheckBombsAndGround();
@@ -238,7 +238,7 @@ void SBomber::ProcessKBHit()
         c = _getch();
     }
 
-    Logger::getInstance().WriteToLog(string(__FUNCTION__) + " was invoked. key = ", c);
+    WriteToLog(string(__FUNCTION__) + " was invoked. key = ", c);
 
     switch (c) {
 
@@ -266,7 +266,7 @@ void SBomber::ProcessKBHit()
 
 void SBomber::DrawFrame()
 {
-    Logger::getInstance().WriteToLog(string(__FUNCTION__) + " was invoked");
+    WriteToLog(string(__FUNCTION__) + " was invoked");
 
     for (auto *it : vecDynamicObj) {
         if (it != nullptr) {
@@ -280,7 +280,7 @@ void SBomber::DrawFrame()
         }
     }
 
-    ScreenSingleton::getInstance().GotoXY(0, 0);
+    GotoXY(0, 0);
     fps++;
 
     FindLevelGUI()->SetParam(passedTime, fps, bombsNumber, score);
@@ -288,7 +288,7 @@ void SBomber::DrawFrame()
 
 void SBomber::TimeStart()
 {
-    Logger::getInstance().WriteToLog(string(__FUNCTION__) + " was invoked");
+    WriteToLog(string(__FUNCTION__) + " was invoked");
     startTime = GetTickCount64();
 }
 
@@ -298,7 +298,7 @@ void SBomber::TimeFinish()
     deltaTime = uint16_t(finishTime - startTime);
     passedTime += deltaTime;
 
-    Logger::getInstance().WriteToLog(string(__FUNCTION__) + " deltaTime = ", (int)deltaTime);
+    WriteToLog(string(__FUNCTION__) + " deltaTime = ", (int)deltaTime);
 
     std::this_thread::sleep_for(20ms);
 }
@@ -306,7 +306,7 @@ void SBomber::TimeFinish()
 void SBomber::DropBomb()
 {
     if (bombsNumber > 0) {
-        Logger::getInstance().WriteToLog(string(__FUNCTION__) + " was invoked");
+        WriteToLog(string(__FUNCTION__) + " was invoked");
 
         Plane *pPlane = FindPlane();
         double x = pPlane->GetX() + 4;

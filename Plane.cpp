@@ -2,20 +2,20 @@
 #include <iostream>
 
 #include "Plane.h"
-#include "ScreenSingleton.h"
+#include "MyTools.h"
 
 using namespace std;
+using namespace MyTools;
 
 void Plane::Draw() const
 {
-    auto &screen = ScreenSingleton::getInstance();
-    screen.SetColor(CC_LightBlue);
-    screen.GotoXY(x, y);
+    MyTools::SetColor(CC_LightBlue);
+    GotoXY(x, y);
     cout << "=========>";
-    screen.GotoXY(x - 2, y - 1);
+    GotoXY(x - 2, y - 1);
     cout << "===";
-    screen.GotoXY(x + 3, y - 1);
+    GotoXY(x + 3, y - 1);
     cout << R"---(\\\\)---";
-    screen.GotoXY(x + 3, y + 1);
+    GotoXY(x + 3, y + 1);
     cout << "////";
 }
